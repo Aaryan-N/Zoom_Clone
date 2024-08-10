@@ -8,6 +8,7 @@ import {useUser} from "@clerk/nextjs";
 import {useStreamVideoClient} from "@stream-io/video-react-sdk";
 import {Call} from "@stream-io/video-react-sdk";
 import { useToast } from "@/components/ui/use-toast"
+import {Textarea} from "@/components/ui/textarea";
 
 const MeetingTypeList = () => {
     const { toast } = useToast()
@@ -103,6 +104,39 @@ const MeetingTypeList = () => {
                     className='bg-yellow-1'
                 />
 
+                {!callDetails ? (
+                    <MeetingModal
+                        isOpen={meetingState === 'isScheduleMeeting'}
+                        onClose={() => setMeetingState(undefined)}
+                        title="Create meeting"
+                        handleClick={createMeeting}
+                    >
+                        <div className='flex flex-col gap-2.5'>
+                        <label className='text-base text-normal leading-[22px] text-sky-2'>
+                            Add a description
+                        </label>
+                        <Textarea className='border-none bg-dark-2 focus-visible:ring-0 focus-visible:ring-offset-0' onChange={(e) => {
+                            setValues({...values, description: e.target.value})
+                        }}
+                        />
+                        </div>
+                        <div>
+                            // add date picker
+                        </div>
+                    </MeetingModal>
+                ) : <MeetingModal
+                    isOpen={meetingState === 'isScheduleMeeting'}
+                    onClose={() => setMeetingState(undefined)}
+                    title="Meeting Created!"
+                    className='text-center'
+                    handleClick={() => {
+                       // navigator.clipboard.writeText(meetingLink)
+                        // toast({title: 'Link Copied!'})
+                    }}
+                    image = '/icons/checked.svg'
+                    buttonIcon = '/icons/copy.svg'
+                    buttonText = 'Copy Meeting Link'
+                />}
                 <MeetingModal
                     isOpen={meetingState === 'isInstantMeeting'}
                     onClose={() => setMeetingState(undefined)}

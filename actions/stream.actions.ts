@@ -15,11 +15,13 @@ export const tokenProvider = async () => {
 
     if(!apiSecret) throw new Error('API secret is missing');
 
-    const client = new StreamClient(apiSecret, apiSecret);
+    const client = new StreamClient(apiKey, apiSecret);
 
     const exp = Math.round(new Date().getTime() / 1000) + 60 * 60;
 
     const issued = Math.floor(Date.now() / 1000) - 60;
 
-    return client.createToken(user.id, exp, issued);
+    const token = client.createToken(user.id, exp, issued);
+
+    return token
 }

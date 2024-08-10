@@ -25,7 +25,7 @@ const MobileNav = () => {
                     width={36}
                     height={36}
                     alt='hamburger icon'
-                    className="cursor-pointer sm-hidden"/>
+                    className="cursor-pointer sm:hidden"/>
                 </SheetTrigger>
                 <SheetContent side='left' className='border-none bg-dark-1'>
                     <Link href='/' className='flex items-center gap-1'>
@@ -41,7 +41,7 @@ const MobileNav = () => {
 
 
                     <div className='flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto'>
-                        <SheetClose>
+                        <SheetClose asChild>
                             <section className='flex h-full flex-col gap-6 pt-16 text-white'>
                                 { sidebarLinks.map((link) => {
                                     const isActive = pathname === link.route
